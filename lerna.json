@@ -1,0 +1,16 @@
+{
+    "command": {
+        "bootstrap": {
+            "npmClientArgs": ["--no-package-lock"]
+        }
+    },
+	"packages": [
+	    "packages/caliper-core",
+        "packages/caliper-fabric",
+        "packages/caliper-cli",
+        "packages/caliper-publish",
+        "packages/caliper-tests-integration"
+    ],
+	"version": "0.0.1-unstable",
+	"hoist": true
+  }

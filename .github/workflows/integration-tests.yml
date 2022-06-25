@@ -1,0 +1,23 @@
+name: Integration Tests
+
+on:
+  workflow_call:
+
+jobs:
+  fabric-integration-tests:
+    name: Fabric Integration Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Fabric Integration Test
+      run: .build/benchmark-integration-test-direct.sh
+      env:
+        BENCHMARK: fabric
+
