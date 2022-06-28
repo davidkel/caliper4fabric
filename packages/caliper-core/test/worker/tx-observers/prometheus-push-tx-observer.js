@@ -102,15 +102,15 @@ describe('When using a PrometheusPushTxObserver', () => {
         // Assert expected default options
         prometheusPushTxObserver.pushInterval.should.equal(10000);
         prometheusPushTxObserver.defaultLabels.should.deep.equal({
-            roundIndex: 0,
+            // roundIndex: 0,
             roundLabel: undefined,
-            workerIndex: 0
+            // workerIndex: 0
         });
         should.not.exist(prometheusPushTxObserver.processMetricCollectInterval);
         prometheusPushTxObserver.defaultLabels.should.deep.equal({
-            roundIndex: 0,
+            // roundIndex: 0,
             roundLabel: undefined,
-            workerIndex: 0
+            // workerIndex: 0
         });
     });
 
@@ -129,9 +129,9 @@ describe('When using a PrometheusPushTxObserver', () => {
         prometheusPushTxObserver.pushInterval.should.equal(1234);
         prometheusPushTxObserver.processMetricCollectInterval.should.equal(100);
         prometheusPushTxObserver.defaultLabels.should.deep.equal({
-            roundIndex: 0,
+            // roundIndex: 0,
             roundLabel: undefined,
-            workerIndex: 0,
+            // workerIndex: 0,
             anotherLabel: 'anotherLabel'
         });
     });
@@ -145,9 +145,9 @@ describe('When using a PrometheusPushTxObserver', () => {
         await prometheusPushTxObserver.activate(2, 'myTestRound');
 
         prometheusPushTxObserver.defaultLabels.should.deep.equal({
-            roundIndex: 2,
+            // roundIndex: 2,
             roundLabel: 'myTestRound',
-            workerIndex: 0
+            // workerIndex: 0
         });
     });
 
