@@ -233,6 +233,13 @@ class RoundOrchestrator {
             logger.error(`Error while finalizing the report: ${err.stack || err}`);
         }
 
+        await this.stop();
+
+        let benchEndTime = Date.now();
+        logger.info(`Benchmark finished in ${(benchEndTime - benchStartTime)/1000.0} seconds. Total rounds: ${success + failed}. Successful rounds: ${success}. Failed rounds: ${failed}.`);
+    }
+
+    async stop() {
         try {
             await this.monitorOrchestrator.stopAllMonitors();
         } catch (err) {
@@ -244,9 +251,6 @@ class RoundOrchestrator {
         } catch (err) {
             logger.error(`Error while stopping workers: ${err.stack || err}`);
         }
-
-        let benchEndTime = Date.now();
-        logger.info(`Benchmark finished in ${(benchEndTime - benchStartTime)/1000.0} seconds. Total rounds: ${success + failed}. Successful rounds: ${success}. Failed rounds: ${failed}.`);
     }
 }
 

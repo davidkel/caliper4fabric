@@ -38,6 +38,7 @@ class CaliperEngine {
         this.returnCode = -1;
 
         this.adapterFactory = adapterFactory;
+        this.roundOrchestrator = null;
     }
 
     /**
@@ -149,8 +150,8 @@ class CaliperEngine {
                 connector = connector ? connector : await this.adapterFactory(-1);
                 let workerArguments = await connector.prepareWorkerArguments(numberOfWorkers);
 
-                const roundOrchestrator = new RoundOrchestrator(this.benchmarkConfig, this.networkConfig, workerArguments);
-                await roundOrchestrator.run();
+                this.roundOrchestrator = new RoundOrchestrator(this.benchmarkConfig, this.networkConfig, workerArguments);
+                await this.roundOrchestrator.run();
             }
         } catch (err) {
             // this means that we haven't handled/logged this failure yet
@@ -179,6 +180,12 @@ class CaliperEngine {
         }
 
         return this.returnCode;
+    }
+
+    async stop() {
+        if (this.roundOrchestrator) {
+            await this.roundOrchestrator.stop();
+        }
     }
 }
 
